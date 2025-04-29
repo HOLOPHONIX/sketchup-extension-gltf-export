@@ -1,0 +1,30 @@
+require:
+  - rubocop-sketchup
+
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: disable
+  Exclude:
+    - 'bin/*'
+
+# Disable problematic SketchUp cops
+SketchupSuggestions/ToolDrawingBounds:
+  Enabled: false
+
+SketchupSuggestions/ToolInvalidate:
+  Enabled: false
+
+SketchupSuggestions/ToolUserInput:
+  Enabled: false
+
+SketchupSuggestions/FileEncoding:
+  Enabled: false
+
+SketchupRequirements/Exit:
+  Enabled: false
+
+SketchupRequirements/LoadPath:
+  Enabled: false
+
+SketchupRequirements/ExtensionNamespace:
+  Enabled: false
