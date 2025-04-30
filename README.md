@@ -1,99 +1,90 @@
-# HOLOPHONIX GLTF Exporter for SketchUp
+# SketchUp Extension glTF Export for HOLOPHONIX
 
-**Version:** 1.0  
-**Tested with:** HOLOPHONIX 2.2.2, SketchUp 2023 (macOS)  
-**License:** MIT License  
-
----
+Version: 1.0.0
+Tested with: HOLOPHONIX 2.3.0, SketchUp 2023 (macOS 14.7.5)
+License: MIT License
 
 ## Overview
 
-The HOLOPHONIX GLTF Exporter is a refactored version of the original Yulio Technologies exporter. It has been adapted and maintained by the HOLOPHONIX Development Team as a practical, free tool intended for internal and non-commercial use, particularly for spatial audio workflows involving HOLOPHONIX.
+The HOLOPHONIX glTF Exporter is a refactored version of the original Yulio Technologies exporter. It has been adapted and maintained by the HOLOPHONIX Development Team as a practical, free tool for spatial audio workflows involving HOLOPHONIX.
 
-This tool is not intended for commercial redistribution or resale.
+This tool is designed for internal and non-commercial use and is not intended for commercial redistribution or resale.
 
----
+## Features
 
-## License
+    Export SketchUp models to glTF 2.0 (.glb) format.
+    Optimized for use with HOLOPHONIX spatial audio systems.
+    Lightweight and easy to integrate into existing workflows.
 
-This software is distributed under the MIT License.
+## Quick Start
 
-```
-MIT License
+### Installation
 
-Copyright (c) 2019 Yulio Technologies Inc. https://github.com/YulioTech/SketchUp-glTF-Exporter-Ruby
-Copyright (c) 2025 HOLOPHONIX Development Team 
+    Locate the SketchUp Plugins Directory:
+    text
 
-Refactored by the HOLOPHONIX Development Team to be used as a practical free tool, not as a commercial product.
+    ~/Library/Application Support/SketchUp 2023/SketchUp/Plugins
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, subject to the following conditions:
+    Copy the Extension Files:
+        Copy the HOLOPHONIX_gltf_export folder and HOLOPHONIX_gltf_export.rb file into the Plugins directory.
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
-
----
-
-## Installation
-
-1. Locate the SketchUp 2023 Plugins directory:
-
-   ```
-   ~/Library/Application Support/SketchUp 2023/SketchUp/Plugins
-   ```
-
-2. Copy the following into the `Plugins` folder:
-
-   - `HOLOPHONIX_gltf_export` (folder)
-   - `HOLOPHONIX_gltf_export.rb` (file)
-
-3. Restart SketchUp 2023.
-
----
+    Restart SketchUp.
 
 ## Usage
 
-1. In SketchUp, open the top menu and navigate to:
+    In SketchUp, navigate to:
+    text
 
-   ```
-   Extensions → HOLOPHONIX_gltf_export
-   ```
+Extensions → HOLOPHONIX_gltf_export
 
-2. Choose the option:
+Select:
+text
 
-   ```
-   Export Binary glTF 2.0 (.glb)
-   ```
+    Export Binary glTF 2.0 (.glb)
 
-3. Select a destination folder for the `.glb` export.
+    Choose a destination folder for the .glb file.
 
-4. When the export summary appears, the file has been successfully generated.
-
----
+    A summary will appear once the export is complete.
 
 ## Compatibility
 
-- macOS
-- SketchUp 2023
-- HOLOPHONIX 2.2.2 and later
-
----
+    Operating Systems: macOS
+    SketchUp Versions: 2023
+    HOLOPHONIX Versions: 2.2.2 and later
 
 ## Support
 
-This tool is provided as-is, with no warranty or formal support. For questions related to integration with HOLOPHONIX systems, visit:
+This tool is provided as-is, with no warranty or formal support. For questions related to integration with HOLOPHONIX systems, visit [our website](www.holophonix.xyz).
 
-www.holophonix.xyz/
+## Troubleshooting
 
----
+### Extension Not Appearing in SketchUp
+
+    Ensure the HOLOPHONIX_gltf_export folder and HOLOPHONIX_gltf_export.rb file are correctly placed in the SketchUp Plugins directory.
+    Restart SketchUp after installation.
+    Check the Ruby Console (Window → Ruby Console) for any error messages.
+
+### Export Fails
+
+    Verify that the model is properly structured and contains no errors.
+    Ensure you have sufficient permissions to write to the destination folder.
+
+### Debugging
+
+Add the following to HOLOPHONIX_gltf_export.rb to debug the extension:
+ruby
+
+puts "Loading HOLOPHONIX glTF Exporter..."
+
+Check the Ruby Console for this message to confirm the extension is being loaded.
+
+## Changelog
+
+[1.0.0] - 2025-04-29
+
+    Initial release of the HOLOPHONIX glTF Exporter for SketchUp.
+
+## Acknowledgments
+
+    Yulio Technologies Inc. for the original SketchUp glTF Exporter.
+    HOLOPHONIX Development Team for refactoring and maintaining the tool.

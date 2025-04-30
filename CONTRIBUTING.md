@@ -1,78 +1,107 @@
-# VSCode Project for SketchUp Extension Development
+# Contributing to the HOLOPHONIX glTF Exporter
 
-This is a boiler plate example project for setting up a VSCode project for SketchUp extension development.
+We welcome contributions from the community! Whether you’re fixing a bug, adding a feature, or improving documentation, your help is appreciated. Here’s how you can get started.
 
-Key features of this setup:
-
-* When opening the project in VSCode you will be presented with a recommended set of VSCode extensions if you are missing any.
-* Configured for Ruby auto-complete and code insight.
-* SketchUp Ruby API supported in auto-complete.
-* VSCode tasks for debugging Ruby source in SketchUp.
-* Inline static analysis powered by RuboCop and RuboCop SketchUp.
-
-![](https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/images/VSCode/VSCodeSolargraphAutoComplete.png)
+---
 
 ## Prerequisites
 
-* Standalone Ruby installed on your development system. See [rubocop-sketchup manual](https://rubocop-sketchup.readthedocs.io/en/stable/installation/) for more details.
-* The [Bundler gem](http://bundler.io/) to manage gem dependencies.
+- **Ruby**: Ensure you have a standalone Ruby installation. See the Ruby installation guide for details.
+- **Bundler**: Install the Bundler gem to manage dependencies:
 
-## Getting started
+    ```bash
+    gem install bundler
+    ```
 
-1. Clone the project to your machine.
-2. From the command line install the require gem dependencies: `bundle install`
-3. Start coding!
+---
 
-## Configuration
+## Setup
 
-You might want to review the various configuration files to fit your project needs:
+1. **Fork the Repository**: Click the "Fork" button on the GitHub repository page to create your own copy.
+2. **Clone the Repository**:
 
-### `.rubocop.yml`
+     ```bash
+     git clone https://github.com/YOUR_USERNAME/sketchup-extension-vscode-project.git
+     cd sketchup-extension-vscode-project
+     ```
 
-Configure what RuboCop should look for when analyzing your project. There are comments inline in the configuration file offering some help with what is pre-configured. For more details refer to the  [rubocop-sketchup manual](https://rubocop-sketchup.readthedocs.io/en/stable/).
+3. **Install Dependencies**:
 
-### `.solargraph.yml`
+     ```bash
+     bundle install
+     ```
 
-You might want to update the `require_paths` to reflect one of your SketchUp installation paths to ensure Solargraph is able to provide full auto-complete for the SketchUp API.
+---
 
-### `.vscode/tasks.json`
+## Making Changes
 
-Add/remove task launchers for relevant SketchUp versions. Follow the pattern for the existing launchers.
+1. **Create a New Branch**:
 
-### `.editorconfig`
+     ```bash
+     git checkout -b feature/your-feature-name
+     ```
 
-You might want to adjust this configuration file to suit your own coding style. This file is a [generic config file](https://editorconfig.org/) supported by many code editors.
+     Use a descriptive branch name that reflects the changes you’re making.
 
-## How To
+2. **Make Your Changes**:
+     - Write your code or update the documentation.
+     - Follow the project’s coding standards and style guidelines.
 
-### Debug in SketchUp
+3. **Test Your Changes**:
+     - Run RuboCop to ensure your code adheres to the style guide:
 
-![](https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/images/VSCode/VSCodeDebugging.gif)
+         ```bash
+         bundle exec rubocop
+         ```
 
-**Note:** _Make sure you have [installed the required debugger](https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/VSCode-Debugger-Setup#preparing-sketchup) dll/dylib to enable debugging in SketchUp._
+     - Test the extension in SketchUp to verify functionality.
 
-You also need to make sure you are [loading the extension](https://github.com/SketchUp/sketchup-ruby-api-tutorials#loading-directly-from-the-repository) directly from your project's directory.
+4. **Commit Your Changes**:
 
-A visual guide is available in our [tutorials repository](https://code.visualstudio.com/docs/editor/debugging).
+     ```bash
+     git add .
+     git commit -m "Your detailed commit message"
+     ```
 
-The short version is condensed here:
+     Write clear and concise commit messages that explain the purpose of your changes.
 
-1. Set break points in the gutter bar next to the line numbers in the editor.
-2. `View > Command Palette` (`Ctrl+Shift+P`)
-3. Start typing `task`
-4. Pick `Tasks: Run Task`
-5. Pick `Launch SketchUp in Ruby debug mode`
-5. Pick the version of SketchUp to launch (e.g. `2022`)
-6. Wait for SketchUp to launch.
-7. Go to the Debug tab in VSCode (`Ctrl+Shift+D`)
-8. Pick `Listen for rdebug-ide` in the drop-down.
-9. Click the `Start Debugging` button.
+5. **Push Your Changes**:
 
-More details: https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/VSCode-Debugger-Setup
+     ```bash
+     git push origin feature/your-feature-name
+     ```
 
-## Further Reading
+---
 
-For the latest information on setting up rubocop-sketchup integration with VSCode, refer to:
+## Submitting a Pull Request
 
-* https://rubocop-sketchup.readthedocs.io/en/stable/integration_with_other_tools/
-* https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki
+1. **Open a Pull Request**:
+     - Go to the GitHub repository page and click "New Pull Request."
+     - Select your branch and provide a detailed description of your changes.
+
+2. **Review Process**:
+     - Your pull request will be reviewed by the maintainers.
+     - Be prepared to address feedback or make additional changes.
+
+---
+
+## Code Style and Guidelines
+
+- **RuboCop**: Follow the RuboCop style guide. Run `bundle exec rubocop` to check your code.
+- **Testing**: Ensure your changes are thoroughly tested before submitting a pull request.
+
+---
+
+## Reporting Issues
+
+If you encounter a bug or have a feature request, please open an issue on GitHub. Include the following details:
+
+- A clear description of the problem or request.
+- Steps to reproduce the issue (if applicable).
+- Screenshots or error messages (if applicable).
+
+---
+
+## Acknowledgments
+
+Thank you for contributing to the HOLOPHONIX glTF Exporter! Your efforts help make this tool better for everyone.
