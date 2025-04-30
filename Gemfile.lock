@@ -49,6 +49,7 @@ GEM
     public_suffix (6.0.1)
     racc (1.8.1)
     rainbow (3.1.1)
+    rake (13.2.1)
     rbs (3.9.2)
       logger
     rbtree (0.4.6)
@@ -126,6 +127,7 @@ DEPENDENCIES
   base64 (~> 0.2.0)
   commonmarker (~> 0.23)
   minitest
+  rake
   rubocop (~> 1.30)
   rubocop-sketchup (~> 1.4.0)
   sketchup-api-stubs
