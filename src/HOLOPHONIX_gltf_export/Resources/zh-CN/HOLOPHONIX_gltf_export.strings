@@ -16,4 +16,4 @@
 "path"="保存到资料夹";
 "triangles"="三角形";
 "unsupportedImage"="是不受支持的图像类型, 根据glTF规范";
-"badUVW","不支持包含透视图纹理（UVW）的模型";
+"badUVW"="不支持包含透视图纹理（UVW）的模型";

@@ -19,4 +19,4 @@
 "triangles"="Triangles";
 "vertices"="Vertices";
 "unsupportedImage"="is an unsupported image type according to the glTF specification";
-"badUVW","Models containing perspective-mapped textures (UVW) are not supported";
+"badUVW"="Models containing perspective-mapped textures (UVW) are not supported";

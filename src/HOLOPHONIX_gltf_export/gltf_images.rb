@@ -25,6 +25,7 @@
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 require "mini_magick"
 require 'tmpdir'
+require 'fileutils'
 
 module HOLOPHONIX
 	module GltfExporter
@@ -49,7 +50,7 @@ module HOLOPHONIX
 				
 				if imageType != 'jpeg' && imageType != 'png'
 					# it is generally fatal to the glTF viewer if the image is not a JPEG or PNG.
-					@errors.push("image/" + imageType + ' ' + TRANSLATE('UnsupportedImage'))
+					@errors.push("image/" + imageType + ' ' + TRANSLATE['unsupportedImage'])
 				end
 				
 				#puts "Writing image buffer with index " + @buffer_index.to_s

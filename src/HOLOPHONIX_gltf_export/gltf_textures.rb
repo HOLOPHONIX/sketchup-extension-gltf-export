@@ -58,7 +58,7 @@ module HOLOPHONIX
 				#if sampler != nil
 				#	texture["sampler"] = sampler
 				#end
-				@textures_hash[texture] = index
+				@textures_hash[face.material.texture] = index
 				@textures.push(texture)
 				
 				return index

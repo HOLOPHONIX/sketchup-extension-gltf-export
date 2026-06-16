@@ -369,7 +369,7 @@ module HOLOPHONIX
 					 		uvw2 = mesh.uv_at(idx2,true)
 							
 							if @isWarning == false && (uvw0[2] != 1.0 || uvw1[2] != 1.0 || uvw2[2] != 1.0)
-								@errors.push(TRANSLATE("badUVW"))
+								@errors.push(TRANSLATE["badUVW"])
 								@isWarning = true
 							end
 							

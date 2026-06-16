@@ -188,7 +188,7 @@ module HOLOPHONIX
 				r = material.color.red / 255.0
 				g = material.color.green / 255.0
 				b = material.color.blue / 255.0
-				return add_material_node(name, r,g,b,a, defaultMetallicFactor,defaultRoughnessFactor,false, nil)
+				return add_material_node(name, r,g,b,a, metallicFactor,roughnessFactor,false, nil)
 			end
 			
 			def get_material_attribute(material, dictionaryName, attributeName, defaultValue)
