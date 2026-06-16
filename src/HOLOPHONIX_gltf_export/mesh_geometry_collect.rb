@@ -92,9 +92,6 @@ module HOLOPHONIX
 					return find_entity_material_face(e.parent)
 				end
 				
-				#debug what I'm traversing
-				puts e.class
-				
 				# class might be a model
 				return nil
 			end

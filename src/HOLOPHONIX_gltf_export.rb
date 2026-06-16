@@ -65,14 +65,17 @@ Sketchup.require 'extensions'
 
 module HOLOPHONIX
 	module GltfExporter
+		# Single source of truth for the extension version.
+		VERSION = '3.0.0'
+
 		unless file_loaded?(__FILE__)
 			# because LanguageHandler.new works at this directory level, create a constant for it here
 			TRANSLATE = LanguageHandler.new('HOLOPHONIX_gltf_export.strings')
-			
+
 			ex = SketchupExtension.new(TRANSLATE["title"], 'HOLOPHONIX_gltf_export/gltf_export')
 			ex.description = TRANSLATE["description"]
-			ex.version     = '2.2.2'
-			ex.copyright   = '©2019'
+			ex.version     = VERSION
+			ex.copyright   = '©2019–2026 HOLOPHONIX S.A.S.'
 			ex.creator     = 'HOLOPHONIX S.A.S.'
 			Sketchup.register_extension(ex, true)
 			file_loaded(__FILE__)

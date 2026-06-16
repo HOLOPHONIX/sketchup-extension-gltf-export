@@ -10,20 +10,25 @@ The HOLOPHONIX glTF Exporter enables seamless integration between SketchUp's 3D 
 
 1. Export SketchUp models directly to glTF 2.0 (.glb) format
 1. Optimized for HOLOPHONIX spatial audio system compatibility
-1. Preserve material properties and textures during export
+1. Preserve geometry and material colors (base color, metallic/roughness, transparency) during export
+1. No external dependencies — pure Ruby, ready for Trimble extension signing
 1. Lightweight implementation with minimal impact on SketchUp performance
+
+> **Note:** Image-mapped textures are not exported. Surfaces are exported with their material base colors, which is what HOLOPHONIX spatial-audio visualization needs. This keeps the extension dependency-free and signing-ready.
 
 ## Quick Start
 
 ### Installation
 
-1. Locate the SketchUp Plugins Directory, usually found at:
+1. Locate the SketchUp Plugins Directory for your installed version, e.g.:
 
     ```bash
-    ~/Library/Application Support/SketchUp 2023/SketchUp/Plugins
+    ~/Library/Application Support/SketchUp 2026/SketchUp/Plugins
     ```
 
 1. Copy the HOLOPHONIX_gltf_export folder and HOLOPHONIX_gltf_export.rb file into the Plugins directory.
+
+   Alternatively, run `scripts/install_extension.sh`, which auto-detects your installed SketchUp version.
 
 1. Restart SketchUp.
 
@@ -42,7 +47,7 @@ The HOLOPHONIX glTF Exporter enables seamless integration between SketchUp's 3D 
 | Component | Supported Versions |
 |-----------|-------------------|
 | Operating System | macOS |
-| SketchUp | 2023 to 2025 |
+| SketchUp | 2023 to 2026 |
 | HOLOPHONIX | 2.2.2 and later |
 
 ## Troubleshooting
