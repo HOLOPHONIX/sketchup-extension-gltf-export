@@ -30,8 +30,7 @@ module HOLOPHONIX
 	
 		class GltfMaterials
 			
-			def initialize(textures)
-				@textures = textures
+			def initialize
 				@materials = []
 				@materials_hash = {}
 				#@is_microsoft = false
@@ -45,7 +44,7 @@ module HOLOPHONIX
 				#@is_microsoft = is_microsoft
 			end
 			
-			def add_material_node(name,r,g,b,a,metallic_factor,roughness_factor,double_sided,texture_id)
+			def add_material_node(name,r,g,b,a,metallic_factor,roughness_factor,double_sided)
 				# Paint3D requires a material name even though it is not required according to glTF spec...
 				#name = nil
 				#if @is_microsoft
@@ -76,29 +75,6 @@ module HOLOPHONIX
 					},
 				}
 
-				if texture_id != nil
-					# Lev: in SU when a texture is used in a material, its pixel values (including the alpha) are multipled by the base color values (thus providing the mechanism for linear RGBA blending between both).
-					# This matches nicely with the way the glTF 2.0 spec (https://github.com/KhronosGroup/glTF/tree/master/specification/2.0) defines the similar scenario:
-					# "If both factors and textures are present the factor value acts as a linear multiplier for the corresponding texture values."
-					# So the behavior below has to be the one of adding "baseColorTexture" property to the "pbrMetallicRoughness", rather than overwriting the "baseColorFactor" added above.
-					material["pbrMetallicRoughness"]["baseColorTexture"] = { "index" => texture_id } 
-					
-					#if @is_microsoft == true
-						# metallicRoughnessTexture is currently required by Paint3D.
-						# As we dont have a texture to use, repeat the same texture.
-						# todo: Fix this once Microsoft releases a version of Paint3D with this bug fixed!
-						#metal_texture_id = texture_id
-						
-						# Have to repeat the same texture because there is no api to create an image on the fly
-						# and Microsoft Paint 3D does not accept any metallicRoughnessTexture image with
-						# dimensions different from the baseColorTexture
-						
-						#metal_texture_id = @textures.add_metallic_texture()
-						#metallicRoughnessTexture = { "index" => metal_texture_id }
-						#material["pbrMetallicRoughness"]["metallicRoughnessTexture"] = metallicRoughnessTexture
-					#end
-				end
-				
 				emissiveR = 0.0
 				emissiveG = 0.0
 				emissiveB = 0.0
@@ -164,32 +140,12 @@ module HOLOPHONIX
 				if(a < 1.0)
 					material["alphaMode"] = "BLEND"
 				end
-				if texture_id != nil
-					# also set blend mode if it is a texture, as the texture may contain transparency
-					material["alphaMode"] = "BLEND"
-				end
-				
+
 				index = @materials.length
 				@materials.push(material)
 				return index
 			end
 			
-			
-			def add_material_by_material(name, material)
-				# todo, this function should eventually create a 'virtual', ie temporary face, apply the material, then extract image
-				index = @materials_hash[material]
-				if index != nil
-					return index
-				end
-				metallicFactor = get_material_attribute(material, 'pbr','metallicFactor',0.1)
-				roughnessFactor = get_material_attribute(material, 'pbr', 'roughnessFactor',0.9)
-				
-				a = material.alpha
-				r = material.color.red / 255.0
-				g = material.color.green / 255.0
-				b = material.color.blue / 255.0
-				return add_material_node(name, r,g,b,a, defaultMetallicFactor,defaultRoughnessFactor,false, nil)
-			end
 			
 			def get_material_attribute(material, dictionaryName, attributeName, defaultValue)
 				if material == nil
@@ -215,8 +171,8 @@ module HOLOPHONIX
 
 				if (material == nil)
 					if @defaultMaterial == -1
-						#@defaultMaterial = add_material_node("default material",0.5,0.5,0.75,1.0, 0.1,0.5,true,nil)
-						@defaultMaterial = add_material_node("default material",1,1,1,1.0, 0.1,0.5,true,nil) #Use white (not blue) as a default material
+						#@defaultMaterial = add_material_node("default material",0.5,0.5,0.75,1.0, 0.1,0.5,true)
+						@defaultMaterial = add_material_node("default material",1,1,1,1.0, 0.1,0.5,true) #Use white (not blue) as a default material
 					end
 					return @defaultMaterial
 				end
@@ -270,12 +226,7 @@ module HOLOPHONIX
 					end
 				end
 				
-				if (material.texture != nil)
-					texture_id = @textures.add_texture(face)
-					return add_material_node(name, r,g,b,a, metallicFactor, roughnessFactor, double_sided, texture_id)
-				end
-
-				return add_material_node(name, r,g,b,a, metallicFactor, roughnessFactor, double_sided, nil)
+				return add_material_node(name, r,g,b,a, metallicFactor, roughnessFactor, double_sided)
 			end
 
 		end

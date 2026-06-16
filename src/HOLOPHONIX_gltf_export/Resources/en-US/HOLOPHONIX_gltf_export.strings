@@ -6,8 +6,6 @@
 "menuGlb"="Export Binary glTF 2.0 (.glb)";
 "menuGlbMicrosoft"="Export Binary glTF for Microsoft Paint 3D (.glb)";
 "untitled"="Untitled";
-"images"="Images";
-"textures"="Textures";
 "materials"="Materials";
 "nodes"="Nodes";
 "meshes"="Meshes";
@@ -18,5 +16,4 @@
 "path"="Saved to Path";
 "triangles"="Triangles";
 "vertices"="Vertices";
-"unsupportedImage"="is an unsupported image type according to the glTF specification";
-"badUVW","Models containing perspective-mapped textures (UVW) are not supported";
+"badUVW"="Models containing perspective-mapped textures (UVW) are not supported";

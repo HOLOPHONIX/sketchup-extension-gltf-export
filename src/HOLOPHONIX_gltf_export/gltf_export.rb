@@ -26,7 +26,6 @@
 require "json"
 require 'langhandler'
 require 'sketchup'
-#require 'profiler'
 
 Sketchup.require 'HOLOPHONIX_gltf_export/gltf_nodes'
 Sketchup.require 'HOLOPHONIX_gltf_export/gltf_buffers'
@@ -34,9 +33,7 @@ Sketchup.require 'HOLOPHONIX_gltf_export/gltf_buffer_views'
 Sketchup.require 'HOLOPHONIX_gltf_export/gltf_accessors'
 Sketchup.require 'HOLOPHONIX_gltf_export/gltf_meshes'
 Sketchup.require 'HOLOPHONIX_gltf_export/gltf_materials'
-Sketchup.require 'HOLOPHONIX_gltf_export/gltf_textures'
 Sketchup.require 'HOLOPHONIX_gltf_export/gltf_nodes'
-Sketchup.require 'HOLOPHONIX_gltf_export/gltf_images'
 Sketchup.require 'HOLOPHONIX_gltf_export/mesh_geometry'
 Sketchup.require 'HOLOPHONIX_gltf_export/mesh_geometry_collect'
 Sketchup.require 'HOLOPHONIX_gltf_export/gltf_cameras'
@@ -79,14 +76,12 @@ module HOLOPHONIX
 				@buffers = GltfBuffers.new
 				@buffer_views = GltfBufferViews.new
 				@accessors = GltfAccessors.new
-				@images = GltfImages.new(@buffers, @buffer_views, @errors, @current_buffer_index)
 				@buffers.add_or_append_buffer(@current_buffer_index, '', 1) #Init an empty buffer to keep the indices consistent (since there might be no textures exported)
 				#@current_buffer_index = @current_buffer_index + 1 #Increment the current buffer index whenever we want to create a new separate buffer (e.g. for textures, geometry, etc.)
-				@textures = GltfTextures.new(@images)
 				@nodes = GltfNodes.new
 				@meshes = GltfMeshes.new
 				@cameras=GltfCameras.new(@nodes)
-				@materials = GltfMaterials.new(@textures)
+				@materials = GltfMaterials.new
 				@mesh_geometry = MeshGeometry.new
 				@mesh_geometry_collect = MeshGeometryCollect.new(@nodes,@meshes,@materials,@mesh_geometry,@use_matrix,@errors)
 			end
@@ -134,7 +129,6 @@ module HOLOPHONIX
 					else
 						ext = skpFile.split('.').last
 						if ext == "skp"
-							puts "#{skpFile}"
 							glbFile = skpFile.gsub('.skp','.glb')
 							if File.exist?(glbFile)
 								# a xaml file exists for this sketchup file, compare the timestamp of each file
@@ -156,7 +150,6 @@ module HOLOPHONIX
 					end
 				end
 				directories.each do |dir|
-					puts dir
 					exportRecursive(dir)
 				end
 			end
@@ -226,21 +219,6 @@ module HOLOPHONIX
 
 
 			
-					#Test code ->
-					enable_profiler = false
-					if enable_profiler
-					mode = "wb"
-					file = File.open("e:/Downloads/glTF_exporter_profile.txt", mode)
-					Profiler__::start_profile
-					puts "Profiling started at " + Time.now.getutc.to_s + " for " + filename
-					file.write("Profiling started at " + Time.now.getutc.to_s + " for " + filename + "\n")
-					end
-					#<-
-
-					#Test code ->
-					starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-					#<-
-
 					matrix = get_default_matrix()
 
 					matrix = get_default_matrix()
@@ -264,7 +242,7 @@ module HOLOPHONIX
 					asset = {
 						"version" => "2.0",
 						"minVersion" => "2.0", #Min version required to load the file (optional field)
-						"generator" => "Sketchup glTF Exporter v2.2.2 by HOLOPHONIX S.A.S. (www.holophonix.xyz)",
+						"generator" => "Sketchup glTF Exporter v" + VERSION + " by HOLOPHONIX S.A.S. (www.holophonix.xyz)",
 					}
 					
 					# set the glTF copyright field, use model.description
@@ -294,22 +272,7 @@ module HOLOPHONIX
 						export["cameras"] = @cameras.cameras
 					end
 					export["materials"] = @materials.materials
-					
-					if (@images.images.length > 0)
-						export["images"] = @images.images
-					end
 
-					if (@textures.textures.length > 0)
-						export["textures"] = @textures.textures
-						#All textures are using the default 0-indexed sampler in the current implementation
-						samplers =
-						[
-							{
-							}
-						]
-						export["samplers"] = samplers
-					end
-					
 					export["meshes"] = @meshes.meshes
 					export["accessors"] = @accessors.accessors
 					export["bufferViews"] = @buffer_views.buffer_views
@@ -319,32 +282,10 @@ module HOLOPHONIX
 					else
 						write_gltf(filename, export)
 					end
-					
-					#Test code ->
-					ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-					elapsed = ending - starting
-					puts "glTF export to " + filename + " took " + elapsed.to_s + " seconds"
-					#return
-					#<-
-
-					#Test code ->
-					if enable_profiler
-					puts "Profiling stopped at " + Time.now.getutc.to_s
-					file.write("Profiling stopped at " + Time.now.getutc.to_s + "\n----------------------------------------------------------------\n")
-					Profiler__::stop_profile
-					#Profiler__::print_profile($stderr)
-					Profiler__::print_profile(file)
-
-					#puts file.read
-					file.close()
-					end
-					#<-
 				
 					summary = TRANSLATE["exportSummary"]
 					summary << "\n"
 					
-					summary << "\n " + TRANSLATE["images"] + ": " + (export["images"] != nil ? export["images"].length.to_s : 0.to_s)
-					summary << "\n " + TRANSLATE["textures"] + ": " + (export["textures"] != nil ? export["textures"].length.to_s : 0.to_s)
 					summary << "\n " + TRANSLATE["materials"] + ": " + export["materials"].length.to_s
 					
 					summary << "\n " + TRANSLATE["nodes"] + ": " + export["nodes"].length.to_s

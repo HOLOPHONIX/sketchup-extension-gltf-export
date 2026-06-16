@@ -92,9 +92,6 @@ module HOLOPHONIX
 					return find_entity_material_face(e.parent)
 				end
 				
-				#debug what I'm traversing
-				puts e.class
-				
 				# class might be a model
 				return nil
 			end
@@ -369,7 +366,7 @@ module HOLOPHONIX
 					 		uvw2 = mesh.uv_at(idx2,true)
 							
 							if @isWarning == false && (uvw0[2] != 1.0 || uvw1[2] != 1.0 || uvw2[2] != 1.0)
-								@errors.push(TRANSLATE("badUVW"))
+								@errors.push(TRANSLATE["badUVW"])
 								@isWarning = true
 							end
 							

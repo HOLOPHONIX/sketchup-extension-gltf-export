@@ -21,8 +21,8 @@ We welcome contributions from the community! Whether you’re fixing a bug, addi
 2. **Clone the Repository**:
 
      ```bash
-     git clone https://github.com/YOUR_USERNAME/sketchup-extension-vscode-project.git
-     cd sketchup-extension-vscode-project
+     git clone https://github.com/YOUR_USERNAME/sketchup-extension-gltf-export.git
+     cd sketchup-extension-gltf-export
      ```
 
 3. **Install Dependencies**:
