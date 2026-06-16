@@ -1,9 +1,35 @@
 #!/bin/bash
+set -euo pipefail
 
 # Variables
 EXTENSION_NAME="HOLOPHONIX_gltf_export"
-SKETCHUP_PLUGINS_DIR="$HOME/Library/Application Support/SketchUp 2023/SketchUp/Plugins"
-EXTENSION_SRC_DIR="../src"
+
+# Resolve paths relative to this script so it works from any working directory.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+EXTENSION_SRC_DIR="$SCRIPT_DIR/../src"
+
+# Determine the SketchUp Plugins directory.
+# Priority: explicit override ($1 or $SKETCHUP_PLUGINS_DIR) > auto-detected newest install.
+SUPPORT_DIR="$HOME/Library/Application Support"
+
+if [ "${1:-}" != "" ]; then
+  SKETCHUP_PLUGINS_DIR="$1"
+elif [ "${SKETCHUP_PLUGINS_DIR:-}" != "" ]; then
+  : # use the value already in the environment
+else
+  # Find every "SketchUp <year>" install and pick the highest version.
+  SKETCHUP_PLUGINS_DIR=""
+  while IFS= read -r dir; do
+    SKETCHUP_PLUGINS_DIR="$dir/SketchUp/Plugins"
+  done < <(find "$SUPPORT_DIR" -maxdepth 1 -type d -name 'SketchUp *' 2>/dev/null | sort -V)
+
+  if [ -z "$SKETCHUP_PLUGINS_DIR" ]; then
+    echo "Error: No SketchUp installation found under '$SUPPORT_DIR'."
+    echo "Pass the Plugins directory explicitly, e.g.:"
+    echo "  $0 \"\$HOME/Library/Application Support/SketchUp 2026/SketchUp/Plugins\""
+    exit 1
+  fi
+fi
 
 # Check if the source directory exists
 if [ ! -d "$EXTENSION_SRC_DIR" ]; then
