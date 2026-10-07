@@ -72,6 +72,12 @@ Thumbs.db
 /dist/
 *.rbz
 
+# Test models (SketchUp sources and glTF exports)
+*.glb
+*.gltf
+*.skp
+*.skb
+
 # Editor files
 *.swp
 *.swo
