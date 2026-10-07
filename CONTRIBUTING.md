@@ -1,4 +1,4 @@
-# Contributing to the HOLOPHONIX glTF Exporter
+# Contributing to GLB Export for HOLOPHONIX
 
 We welcome contributions from the community! Whether you’re fixing a bug, adding a feature, or improving documentation, your help is appreciated. Here’s how you can get started.
 
@@ -104,4 +104,4 @@ If you encounter a bug or have a feature request, please open an issue on GitHub
 
 ## Acknowledgments
 
-Thank you for contributing to the HOLOPHONIX glTF Exporter! Your efforts help make this tool better for everyone.
+Thank you for contributing to GLB Export for HOLOPHONIX! Your efforts help make this tool better for everyone.

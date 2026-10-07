@@ -1,4 +1,4 @@
-# SketchUp Extension glTF Export for HOLOPHONIX
+# GLB Export for HOLOPHONIX (SketchUp extension)
 
 A lightweight SketchUp extension that exports models to glTF 2.0 (`.glb` / `.gltf`) for use with HOLOPHONIX spatial audio systems.
 
@@ -6,7 +6,7 @@ A lightweight SketchUp extension that exports models to glTF 2.0 (`.glb` / `.glt
 
 ## Overview
 
-The HOLOPHONIX glTF Exporter bridges SketchUp's 3D modeling capabilities and HOLOPHONIX spatial audio systems. Originally developed by Yulio Technologies, this version has been refactored for HOLOPHONIX workflows, letting sound designers and audio engineers visualize spatial audio arrangements in a 3D room model.
+GLB Export for HOLOPHONIX bridges SketchUp's 3D modeling capabilities and HOLOPHONIX spatial audio systems. Originally developed by Yulio Technologies, this version has been refactored for HOLOPHONIX workflows, letting sound designers and audio engineers visualize spatial audio arrangements in a 3D room model.
 
 ## Features
 
@@ -53,7 +53,7 @@ Restart SketchUp after installing.
 
 ## Usage
 
-1. In SketchUp, open `Extensions → HOLOPHONIX glTF export`.
+1. In SketchUp, open `Extensions → GLB Export for HOLOPHONIX`.
 
 1. Choose an export format:
    - `Export Binary glTF 2.0 (.glb)` — single self-contained binary file (recommended for HOLOPHONIX)

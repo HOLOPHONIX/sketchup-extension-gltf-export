@@ -63,6 +63,7 @@ Sketchup.require 'extensions'
 # 2.2.1 Disabled the fix to suppress duplicate geometry in CET exported scenes, since it resulted in removal of valid geometry
 # 3.0.0 Dropped texture/image export and the GraphicsMagick dependency (signing readiness)
 # 3.1.0 Export in the HOLOPHONIX/SketchUp Z-up frame (axes kept, inches to metres only); fixes mirrored exports, imports at rotation 0/0/0
+# 		Renamed to "GLB Export for HOLOPHONIX"
 
 
 module HOLOPHONIX

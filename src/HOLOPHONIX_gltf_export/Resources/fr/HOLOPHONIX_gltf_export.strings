@@ -1,7 +1,7 @@
-"title"="Export glTF";
-"description"="HOLOPHONIX glTF export";
+"title"="Export GLB pour HOLOPHONIX";
+"description"="Exporte les modèles SketchUp en GLB (glTF 2.0 binaire) pour les salles HOLOPHONIX : axe Z vers le haut, en mètres, avec les couleurs des matériaux.";
 "exportSummary"="glTF Export Summary";
-"menuMain"="HOLOPHONIX glTF export";
+"menuMain"="Export GLB pour HOLOPHONIX";
 "menuGltf"="Export glTF 2.0 intégré (.gltf)";
 "menuGlb"="Exporter le fichier binaire glTF 2.0 (.glb)";
 "menuGlbMicrosoft"="Exporter le fichier binaire glTF Microsoft Paint 3D (.glb)";

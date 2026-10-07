@@ -1,7 +1,7 @@
-"title"="glTF导出";
-"description"="HOLOPHONIX glTF导出";
+"title"="HOLOPHONIX GLB导出";
+"description"="将SketchUp模型导出为GLB（二进制glTF 2.0），用于HOLOPHONIX场馆：Z轴向上，单位为米，保留材质颜色。";
 "exportSummary"="glTF导出摘要";
-"menuMain"="HOLOPHONIX glTF export";
+"menuMain"="HOLOPHONIX GLB导出";
 "menuGltf"="导出嵌入式glTF 2.0（.gltf）";
 "menuGlb"="导出二进制glTF 2.0（.glb）";
 "menuGlbMicrosoft"="导出二进制glTF Microsoft Paint 3D （.glb）";
