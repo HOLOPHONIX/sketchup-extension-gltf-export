@@ -92,3 +92,19 @@ Out of scope (deferred)
 
 Full dead-code sweep (exportWithMatrix/@use_matrix, commented Microsoft/Paint3D scaffolding, @warning vs @isWarning, duplicate require), broad RuboCop autocorrect, and a CI lint/smoke-test
 job. Can be a follow-up PR after signing is achieved.
+
+Status
+
+Signing-readiness work (items A–D above) is merged to main (PR #1), and the Warehouse icon is in PR #2. VERSION is now 3.1.0, which fixes the export orientation (see below).
+
+# HOLOPHONIX coordinate system and export orientation
+
+HOLOPHONIX side (repo ../holophonix, three.js / react-three-fiber):
+- The world is Z up: X = right, Y = front (azim 0°), Z = up (src/common/3DTools.ts; grids rotated into XY; groups use up=[0,0,1]).
+- The venue model is loaded with useGLTF and no axis conversion (src/client/UI/Windows/Venue3D/Model3D/Model3D.tsx). The only adjustment is manifest.model3D.rotation (degrees, three.js Euler XYZ, default 0/0/0), set from the "Rot X/Y/Z" inspector sliders.
+
+Exporter side (src/HOLOPHONIX_gltf_export/gltf_export.rb, export):
+- SketchUp is also right-handed Z-up (red X = right, green Y = away from the Front-view camera, blue Z = up), so the SketchUp and HOLOPHONIX frames are identical. Since 3.1.0, get_default_matrix is a pure inches → metres scaling. The output is deliberately Z-up (non-standard for glTF, which is Y-up).
+- The matrix is baked into vertex positions (mesh.transform!, @use_matrix = false), and the root node carries no matrix. A negative determinant would reverse the triangle winding, but pure scaling has a positive one.
+- History: up to 3.0.x the root matrix was get_default_matrix (standard Z-up → Y-up rotation) * swap_matrix (Y/Z swap, determinant -1) * rotation_matrix (180° about X), a net mapping of (x, -y, z), i.e. mirrored. An interim 3.1.0 draft pre-multiplied a -90° X correction, giving (x, z, y), still mirrored. Verified with glb-tester-4 (3D-text labels FRONT/REAR/LEFT/RIGHT/TOP/STAGE): in HOLOPHONIX at Rot X 90 / Rot Y 180, every label read backwards and LEFT/RIGHT were swapped, which led to the pure-scaling fix. Re-exported with the pure scaling, the test model was confirmed correct in HOLOPHONIX at Rot 0/0/0 (labels readable, LEFT/RIGHT correct, stage at +Y).
+- Cameras (gltf_cameras.rb) use their own hardcoded "Camera Group" matrix and were not updated. HOLOPHONIX ignores cameras in venue models.

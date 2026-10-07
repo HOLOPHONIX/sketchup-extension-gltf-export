@@ -90,31 +90,6 @@ module HOLOPHONIX
 				@use_matrix = true
 			end
 
-			def rotation_matrix()
-				# # Convert angle from degrees to radians
-				angle_radians = 180 * Math::PI / 180
-				
-				# # Define the rotation transformation around the Z axis
-				rotation_transformation = Geom::Transformation.rotation([0, 0, 0], [1, 0, 0], angle_radians)
-			
-				# # Apply the rotation transformation to the entire model
-				return rotation_transformation
-
-			end
-
-			def swap_matrix()
-				
-				swap_transformation = Geom::Transformation.new([
-					1, 0, 0, 0,  
-					0, 0, 1, 0,  
-					0, 1, 0, 0,  
-					0, 0, 0, 1   # Aucune translation
-				  ])
-
-				# Apply this transformation to the entire model
-				return swap_transformation
-			end
-			
 			def exportRecursive(path)
 					
 				#puts path
@@ -220,14 +195,6 @@ module HOLOPHONIX
 
 			
 					matrix = get_default_matrix()
-
-					matrix = get_default_matrix()
-
-					swap_result = swap_matrix
-					matrix = matrix * swap_result
-				
-					rotation_result = rotation_matrix
-					matrix = matrix * rotation_result
 
 					#puts 'Collating geometry and materials'
 					root_node_id = @nodes.add_node('root', matrix, @use_matrix)
@@ -388,17 +355,13 @@ module HOLOPHONIX
 			end
 			
 			
+			# HOLOPHONIX uses the same right-handed, Z-up frame as SketchUp
+			# (X = right, Y = front, Z = up), so the export keeps the axes as-is and
+			# only scales inches to metres. This is a pure scaling (positive
+			# determinant): no mirroring, and the triangle winding is preserved.
+			# Note: the output is therefore Z-up, not the Y-up glTF convention.
 			def get_default_matrix
-				trans = Geom::Transformation.new
-				
-				# rotate the model to bring it in line with OpenGL axis representations
-				trans = trans * Geom::Transformation.rotation([0,0,0], [0,1,0], Math::PI)
-				trans = trans * Geom::Transformation.rotation([0,0,0], [1,0,0], -Math::PI/2.0)
-				trans = trans * Geom::Transformation.rotation([0,0,0], [0,0,1], Math::PI)
-				
-				# scale the model to metres
-				trans = trans * Geom::Transformation.scaling(0.0254,0.0254,0.0254)
-				return trans
+				return Geom::Transformation.scaling(0.0254, 0.0254, 0.0254)
 			end
 
 			# check if any index value requires a 32-bit index array instead of a 16-bit index arrays
